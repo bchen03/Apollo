@@ -1,0 +1,19 @@
+type DataVendor {
+    _id: String!
+    name: String!
+}
+
+
+type DataSource {
+    _id: String!
+    name: String
+    vendor: DataVendor!
+}
+
+
+type Subscription {
+    _id: String!
+    name: String!
+    description: String
+    source: DataSource!
+}
