@@ -9,17 +9,16 @@ import SubscriptionsSchema from '../../api/subscriptions/subscriptions.graphql';
 import ResolutionsResolver, { newResolution } from '../../api/resolutions/resolvers';
 import SubscriptionsResolver from '../../api/subscriptions/resolvers';
 
- 
+
 const testSchema = `
-type Query {
-    hi: String
-    resolutions: [Resolution]
-    vendors: [DataVendor]
-    sources: [DataSource]
-    subscriptions: [Subscription]
-    subscription(id: String!): Subscription
-    
-}
+    type Query {
+        hi: String
+        resolutions: [Resolution]
+        vendors: [DataVendor]
+        sources: [DataSource]
+        subscriptions: [Subscription]
+        subscription(id: String!): Subscription
+    }
 `;
  
 const typedefs = [
