@@ -77,4 +77,4 @@ const subscriptions = [
     }
 ];
  
-export default SubscriptionsResolver;
+export { SubscriptionsResolver };

@@ -3,7 +3,3 @@ type Resolution {
     name: String!
 }
 
-type Mutation {
-    createResolution(name: String!): Resolution
-}
-

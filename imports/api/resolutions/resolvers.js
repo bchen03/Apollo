@@ -9,16 +9,14 @@ const ResolutionsResolver = {
     }
 };
 
-const newResolution = (name) => {
-    console.log("==> api/resolutions/resolvers.js newResolution, name:", name);
-    const resolutionId = ResolutionsCollection.insert({
-        name: name
-    });
-    return ResolutionsCollection.findOne(resolutionId);
-}
+const ResolutionsMutation = {
+    createResolution(obj, args, context) {
+        console.log('==> api/resolutions/resolvers.js createResolution, obj: ', obj, ', args: ', args, ', context: ', context);
+        const resolutionId = ResolutionsCollection.insert({
+            name: args.name
+        });
+        return ResolutionsCollection.findOne(resolutionId);
+    }
+};
 
-//const res = Resolutions.find({}).fetch();
-//console.log("Resolutions.fetch: ", res);
-
-export default ResolutionsResolver;
-export { newResolution };
+export { ResolutionsResolver, ResolutionsMutation };

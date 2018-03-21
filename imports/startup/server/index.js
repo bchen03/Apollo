@@ -3,14 +3,14 @@ console.log("==> server/index.js");
 import { createApolloServer } from 'meteor/apollo';
 import { makeExecutableSchema } from 'graphql-tools';
 
-import ResolutionsSchema from '../../api/resolutions/resolutions.graphql';
-import SubscriptionsSchema from '../../api/subscriptions/subscriptions.graphql';
+import ResolutionsType from '../../api/resolutions/resolutions.graphql';
+import SubscriptionsType from '../../api/subscriptions/subscriptions.graphql';
 
-import ResolutionsResolver, { newResolution } from '../../api/resolutions/resolvers';
-import SubscriptionsResolver from '../../api/subscriptions/resolvers';
+import { ResolutionsResolver, ResolutionsMutation } from '../../api/resolutions/resolvers';
+import { SubscriptionsResolver } from '../../api/subscriptions/resolvers';
 
 
-const testSchema = `
+const rootType = `
     type Query {
         hi: String
         resolutions: [Resolution]
@@ -19,15 +19,19 @@ const testSchema = `
         subscriptions: [Subscription]
         subscription(id: String!): Subscription
     }
+
+    type Mutation {
+        createResolution(name: String!): Resolution
+    }
 `;
  
 const typedefs = [
-    testSchema,
-    ResolutionsSchema,
-    SubscriptionsSchema
+    rootType,
+    ResolutionsType,
+    SubscriptionsType
 ];
 
-const HiResolver = {
+const TestResolver = {
     hi() {
         return "Hello World!!!";
     }
@@ -35,16 +39,12 @@ const HiResolver = {
 
 const resolvers = {
     Query: {
-        ...HiResolver,
+        ...TestResolver,
         ...ResolutionsResolver,
         ...SubscriptionsResolver
     },
     Mutation: {
-        createResolution(obj, args, context) {
-            console.log('==> server/index.js Mutation.createResolution, obj: ', obj, ', args: ', args, ', context: ', context);
-            const name = args.name;
-            return newResolution(name);
-        }
+        ...ResolutionsMutation    
     }
 };
   

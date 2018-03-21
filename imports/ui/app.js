@@ -28,7 +28,7 @@ const App = ({ data }) => {
 };
 
 const hiGql = gql`
-    {
+    query {
         hi
         resolutions
         {
